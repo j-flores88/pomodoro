@@ -1,5 +1,9 @@
 let pomoArr = []
 let pomosNeeded
+let countDown;
+let status = 'stopped'
+let secz
+let currentTimeStamp
 
 const pomoArea = document.getElementById('pomodoros');
 const toms = document.getElementById('img');
@@ -10,6 +14,7 @@ const timeDis = document.getElementById('display');
 const brkBtn = document.getElementById('breakBtn');
 const pomoBtn = document.getElementById('pomoBtn');
 const stopBtn = document.getElementById('stpBtn');
+const resetTime = document.getElementById('resetBtn')
 
 $(reseBtn).hide();
 
@@ -40,44 +45,61 @@ const fillPomos = function() {
     }
 }
 
-const startTimer = function(duration, display) {
-    let timer = duration, minutes, seconds;
+function timer(seconds) {
+    clearInterval(countDown)
+    const now = Date.now();
+    const then = Date.now() + seconds * 1000;
+    displayTimeLeft(seconds)
 
-    setInterval(function(){
-        minutes =  parseInt(timer / 60, 10);
-        seconds = parseInt(timer % 60, 10);
-
-        minutes = minutes < 10 ? '0' + minutes : minutes;
-        seconds = seconds < 10 ? '0' + seconds : seconds;
-
-        timeDis.textContent = minutes + ':' + seconds;
-
-        if (--timer < 0) {
-            timer = duration;
+    countDown = setInterval(() => {
+        const secondsLeft = Math.round((then - Date.now()) / 1000);
+        if(secondsLeft <= 0) {
+            clearInterval(countDown)
+            alert('done')
         }
-    }, 1000)
+        timeDis.textContent = secondsLeft
+        displayTimeLeft(secondsLeft)
+    }, 1000);
+}
+function displayTimeLeft(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainderSeconds = seconds % 60;
 
-    stopBtn.onclick = function() {
-        console.log('stop')
-        clearInterval()
-    }
+    const display = `${minutes < 10 ? '0' : ''}${minutes}:${remainderSeconds < 10 ? '0' : ''}${remainderSeconds}`
+    timeDis.textContent = display
+    secz = remainderSeconds
 }
 
 brkBtn.onclick = function() {
-    let fiveMins = 60 * 5;
-    let display = timeDis;
-
-    startTimer(fiveMins, display)
+    timer(300)
+    status = 'started'
 }
 
 pomoBtn.onclick = function() {
-    let pomoMins = 60 * 25;
-    let display = timeDis;
-
-    startTimer(pomoMins, display)
+    timer(1500)
+    status = 'started'
 }
-
-
+stopBtn.onclick = function() {
+    if(status === 'started') {
+        clearInterval(countDown)
+        status = 'paused'
+        currentTimeStamp = parseInt(timeDis.textContent) * 60 + secz
+        stopBtn.textContent = 'RESUME'
+        console.log(currentTimeStamp)
+    } else if(status === 'paused') {
+        clearInterval(countDown)
+        timer(currentTimeStamp)
+        status = 'started'
+        stopBtn.textContent = 'STOP'
+    }
+}
+resetTime.onclick = function() {
+    clearInterval(countDown)
+    timeDis.textContent = '00:00'
+    if(stopBtn.textContent === 'RESUME') {
+        stopBtn.textContent = 'STOP'
+    }
+}
 enterBtn.onclick = function() {
     fillArr();
     $(enterBtn).fadeOut();
