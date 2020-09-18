@@ -16,6 +16,7 @@ const pomoBtn = document.getElementById('pomoBtn');
 const stopBtn = document.getElementById('stpBtn');
 const resetTime = document.getElementById('resetBtn')
 
+
 $(reseBtn).hide();
 
 const fillArr = function(amount){
@@ -27,6 +28,7 @@ const fillArr = function(amount){
     }
     fillPomos()
 }
+
 const fillPomos = function() {
 
     for(let j = 0; j < pomoArr.length; j++) {
@@ -44,7 +46,7 @@ const fillPomos = function() {
         }
     }
 }
-
+//TIMER
 function timer(seconds) {
     clearInterval(countDown)
     const now = Date.now();
@@ -54,8 +56,8 @@ function timer(seconds) {
     countDown = setInterval(() => {
         const secondsLeft = Math.round((then - Date.now()) / 1000);
         if(secondsLeft <= 0) {
-            clearInterval(countDown)
-            alert('done')
+            playAudio()
+            clearInterval(countDown)           
         }
         timeDis.textContent = secondsLeft
         displayTimeLeft(secondsLeft)
@@ -69,7 +71,7 @@ function displayTimeLeft(seconds) {
     timeDis.textContent = display
     secz = remainderSeconds
 }
-
+//BUTTON FUNCTIONS
 brkBtn.onclick = function() {
     timer(300)
     status = 'started'
@@ -114,4 +116,8 @@ reseBtn.onclick = function() {
     pomoArea.innerHTML = ""
     pomoArr = []
     $(reseBtn).hide();
+}
+function playAudio() {
+    let audio = new Audio('./resources/default.mp3')
+    audio.play()
 }
