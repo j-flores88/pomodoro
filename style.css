@@ -3,6 +3,13 @@ body {
     background: -webkit-linear-gradient(to right, #FFC371, #FF5F6D);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #FFC371, #FF5F6D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
 }
+#topHalf {
+    margin-top: 75px;
+    margin-bottom: 75px;
+}
+#tomatoSection {
+    margin-bottom: 75px;
+}
 #topRight {
     width: 100%;
     display: inline-block;

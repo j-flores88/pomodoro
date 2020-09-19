@@ -61,6 +61,7 @@ function timer(seconds) {
         }
         timeDis.textContent = secondsLeft
         displayTimeLeft(secondsLeft)
+        
     }, 1000);
 }
 function displayTimeLeft(seconds) {
@@ -70,7 +71,10 @@ function displayTimeLeft(seconds) {
     const display = `${minutes < 10 ? '0' : ''}${minutes}:${remainderSeconds < 10 ? '0' : ''}${remainderSeconds}`
     timeDis.textContent = display
     secz = remainderSeconds
+    document.title =   `(${timeDis.textContent}) POMODORO!`
+    
 }
+
 //BUTTON FUNCTIONS
 brkBtn.onclick = function() {
     timer(300)
@@ -101,6 +105,7 @@ resetTime.onclick = function() {
     clearInterval(countDown)
     status = 'stopped'
     timeDis.textContent = '00:00'
+    document.title = 'POMODORO!'
     if(stopBtn.textContent === 'RESUME') {
         stopBtn.textContent = 'STOP'
     }
