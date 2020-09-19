@@ -15,7 +15,7 @@ const brkBtn = document.getElementById('breakBtn');
 const pomoBtn = document.getElementById('pomoBtn');
 const stopBtn = document.getElementById('stpBtn');
 const resetTime = document.getElementById('resetBtn')
-
+const taskTime = document.getElementById('taskTime')
 
 $(reseBtn).hide();
 
@@ -35,10 +35,10 @@ const fillPomos = function() {
         let img = document.createElement('img')
 
 
-        img.style.width = "200px";
-        img.style.width = "200px";
+        img.style.width = "125px";
+        img.style.width = "125px";
         img.setAttribute('src', "./resources/tomato.png");
-
+        img.className = 'img-fluid'
         pomoArea.appendChild(img)
 
         img.onclick = function() {
@@ -75,11 +75,13 @@ function displayTimeLeft(seconds) {
 brkBtn.onclick = function() {
     timer(300)
     status = 'started'
+    stopBtn.textContent = 'STOP'
 }
 
 pomoBtn.onclick = function() {
     timer(1500)
     status = 'started'
+    stopBtn.textContent = 'STOP'
 }
 stopBtn.onclick = function() {
     if(status === 'started') {
@@ -97,6 +99,7 @@ stopBtn.onclick = function() {
 }
 resetTime.onclick = function() {
     clearInterval(countDown)
+    status = 'stopped'
     timeDis.textContent = '00:00'
     if(stopBtn.textContent === 'RESUME') {
         stopBtn.textContent = 'STOP'
@@ -107,12 +110,14 @@ enterBtn.onclick = function() {
     $(enterBtn).fadeOut();
     $(reseBtn).fadeIn();
     $(userInput).fadeOut();
-    $(userInput).val('');  
+    $(userInput).val('');
+    $(taskTime).fadeOut();  
 }
 
 reseBtn.onclick = function() {
     $(enterBtn).fadeIn();
     $(userInput).fadeIn();
+    $(taskTime).fadeIn();
     pomoArea.innerHTML = ""
     pomoArr = []
     $(reseBtn).hide();

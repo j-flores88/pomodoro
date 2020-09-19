@@ -1,0 +1,50 @@
+body {
+    background: #FF5F6D;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFC371, #FF5F6D);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFC371, #FF5F6D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+}
+#topRight {
+    width: 100%;
+    display: inline-block;
+    align-self: center;
+    text-align: left;
+}
+#tomPic {
+    display: flex;
+    justify-content: flex-end;
+}
+#tomatoSection {
+
+    align-self: center;
+    text-align: center;
+
+}/*
+#timerSection:button {
+    margin: 15px;
+}*/
+#ente {
+
+}
+#reset {
+    margin-top: 20px;
+}
+#display {
+    font-family: 'Major Mono Display', monospace;
+    font-size: 5em;
+}
+#timeText, #taskTime {
+    margin-top: 10px;
+    font-family: 'Ramabhadra', sans-serif;
+}
+h4 {
+    font-family: 'Ramabhadra', sans-serif;
+    margin-top: -50000px;
+}
+h1 {
+    font-family: 'Amita', cursive;
+    font-weight: 700;   
+    font-size: 4em;
+}
+input {
+    padding: 3px;
+}

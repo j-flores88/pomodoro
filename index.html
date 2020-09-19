@@ -6,7 +6,10 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ramabhadra&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amita:wght@400;700&display=swap" rel="stylesheet">
     <!-- JS -->
     <script
     src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -16,31 +19,45 @@
 </head>
 <body>
     <div class="container" id="topHalf">
-        <div class="row border border-danger">
-            <img src="./resources/tomato.png" alt="" id="tomato">
-            <h1>POMODORO</h1>
-            <h3>Tomato Timer</h3>
+        <div class="row" id="topLeft">
+            <div class="col" id="tomPic">
+                <img src="./resources/tomato.png" alt="" id="tomato" class="img-fluid">
+            </div>
+            <div class="col" id="topRight">
+                <div>
+                    <h1>POMODORO</h1> 
+                </div>
+                <div>
+                    <h4>Tomato Timer</h4>
+                </div>
+                
+            </div>
+        </div>
         </div>
     </div>
 
 
-    <div id="tomatoSection">
-        <p>How many hours will it take to complete the task?</p>
-        <input type="text" id="userInput" placeholder="Enter Hours">
-        <button id="enterBtn">ENTER</button>
-    
-    <div id="pomodoros"></div>
-    <button id="reset">RESTART</button>
+    <div id="tomatoSection" class="container">
+        <div class="row">
+            <div class="col" id="tomatoSection">
+                <p id="taskTime">How many hours will it take to complete the task?</p>
+                <input type="text" id="userInput" placeholder="Enter Hours">
+                <button id="enterBtn" class="btn btn-outline-dark">ENTER</button>
+                <div id="pomodoros"></div>
+                <button id="reset" class="btn btn-outline-dark">RESTART</button>
+            </div>
+            <div class="col" id="timerSection">
+                <p id="timeText">TIMER</p>
+                <p id="display">00:00</p>
+                <button id="pomoBtn" class="btn btn-outline-dark">POMODORO</button>
+                <button id="breakBtn" class="btn btn-outline-dark">BREAK</button>
+                <button id="stpBtn" class="btn btn-outline-dark">STOP</button>
+                <button id="resetBtn" class="btn btn-outline-dark">RESET</button>
+            </div>
+
+        </div>
     </div>
 
-    <div id="timerSection">
-        TIMER
-        <p id="display">00:00</p>
-        <button id="pomoBtn">POMODORO</button>
-        <button id="breakBtn">BREAK</button>
-        <button id="stpBtn">STOP</button>
-        <button id="resetBtn">RESET</button>
-    </div>
     
 
     <!-- SCRIPT TAG-->
