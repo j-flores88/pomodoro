@@ -12,6 +12,7 @@ const enterBtn = document.getElementById('enterBtn');
 const reseBtn = document.getElementById('reset');
 const timeDis = document.getElementById('display');
 const brkBtn = document.getElementById('breakBtn');
+const longBreakBtn = document.getElementById('longBreak')
 const pomoBtn = document.getElementById('pomoBtn');
 const stopBtn = document.getElementById('stpBtn');
 const resetTime = document.getElementById('resetBtn')
@@ -79,13 +80,18 @@ function displayTimeLeft(seconds) {
 brkBtn.onclick = function() {
     timer(300)
     status = 'started'
-    stopBtn.textContent = 'STOP'
+    stopBtn.textContent = 'PAUSE'
+}
+longBreakBtn.onclick = function() {
+    timer(600)
+    status = 'started'
+    stopBtn.textContent = 'PAUSE'
 }
 
 pomoBtn.onclick = function() {
     timer(1500)
     status = 'started'
-    stopBtn.textContent = 'STOP'
+    stopBtn.textContent = 'PAUSE'
 }
 stopBtn.onclick = function() {
     if(status === 'started') {
@@ -98,7 +104,7 @@ stopBtn.onclick = function() {
         clearInterval(countDown)
         timer(currentTimeStamp)
         status = 'started'
-        stopBtn.textContent = 'STOP'
+        stopBtn.textContent = 'PAUSE'
     }
 }
 resetTime.onclick = function() {
@@ -107,7 +113,7 @@ resetTime.onclick = function() {
     timeDis.textContent = '00:00'
     document.title = 'POMODORO!'
     if(stopBtn.textContent === 'RESUME') {
-        stopBtn.textContent = 'STOP'
+        stopBtn.textContent = 'PAUSE'
     }
 }
 enterBtn.onclick = function() {
@@ -120,6 +126,7 @@ enterBtn.onclick = function() {
 }
 
 reseBtn.onclick = function() {
+
     $(enterBtn).fadeIn();
     $(userInput).fadeIn();
     $(taskTime).fadeIn();
@@ -131,3 +138,16 @@ function playAudio() {
     let audio = new Audio('./resources/default.mp3')
     audio.play()
 }
+
+//Enter Key
+window.addEventListener('keydown', function(e){
+    const key = document.querySelector(`button[data-key='${e.keyCode}']`)
+    if(key.classList.contains('enter')) {
+        fillArr();
+        $(enterBtn).fadeOut();
+        $(reseBtn).fadeIn();
+        $(userInput).fadeOut();
+        $(userInput).val('');
+        $(taskTime).fadeOut();
+    }
+})
