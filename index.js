@@ -1,4 +1,5 @@
 let pomoArr = []
+let total = 0;
 let pomosNeeded
 let countDown;
 let status = 'stopped'
@@ -17,8 +18,10 @@ const pomoBtn = document.getElementById('pomoBtn');
 const stopBtn = document.getElementById('stpBtn');
 const resetTime = document.getElementById('resetBtn')
 const taskTime = document.getElementById('taskTime')
+const totalTally = document.querySelector('span')
 
 $(reseBtn).hide();
+
 
 const fillArr = function(amount){
     amount = document.getElementById('userInput').value
@@ -44,6 +47,9 @@ const fillPomos = function() {
 
         img.onclick = function() {
             $(this).fadeOut()
+            $(totalTally).fadeIn();
+            total += 1;
+            totalTally.innerHTML = `POMODOROS: ${total} HOURS: ${total / 2}`
         }
     }
 }
@@ -122,7 +128,7 @@ enterBtn.onclick = function() {
     $(reseBtn).fadeIn();
     $(userInput).fadeOut();
     $(userInput).val('');
-    $(taskTime).fadeOut();  
+    $(taskTime).fadeOut();
 }
 
 reseBtn.onclick = function() {
@@ -130,8 +136,11 @@ reseBtn.onclick = function() {
     $(enterBtn).fadeIn();
     $(userInput).fadeIn();
     $(taskTime).fadeIn();
+    $(totalTally).fadeOut();
     pomoArea.innerHTML = ""
     pomoArr = []
+    total = 0;
+    
     $(reseBtn).hide();
 }
 function playAudio() {
