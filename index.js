@@ -3,7 +3,7 @@ let total = 0;
 let pomosNeeded
 let countDown;
 let status = 'stopped'
-let secz
+let remainderSeconds;
 let currentTimeStamp
 
 const pomoArea = document.getElementById('pomodoros');
@@ -15,29 +15,23 @@ const timeDis = document.getElementById('display');
 const brkBtn = document.getElementById('breakBtn');
 const longBreakBtn = document.getElementById('longBreak')
 const pomoBtn = document.getElementById('pomoBtn');
-const stopBtn = document.getElementById('stpBtn');
+const pauseBtn = document.getElementById('pauseBtn');
 const resetTime = document.getElementById('resetBtn')
 const taskTime = document.getElementById('taskTime')
 const totalTally = document.querySelector('span')
 
 $(reseBtn).hide();
 
-
-const fillArr = function(amount){
-    amount = document.getElementById('userInput').value
-    pomosNeeded = amount * 2;
-    
+const fillArr = (amount) => {
+    pomosNeeded = parseInt(amount) * 2;
     for(let i = 0; i < pomosNeeded; i++) {
         pomoArr.push(toms)
     }
     fillPomos()
 }
-
-const fillPomos = function() {
-
-    for(let j = 0; j < pomoArr.length; j++) {
+const fillPomos = () => {
+    for(let i = 0; i < pomoArr.length; i++) {
         let img = document.createElement('img')
-
 
         img.style.width = "125px";
         img.style.width = "125px";
@@ -54,85 +48,73 @@ const fillPomos = function() {
     }
 }
 //TIMER
-function timer(seconds) {
+const timer = (mins) => {
     clearInterval(countDown)
-    const now = Date.now();
-    const then = Date.now() + seconds * 1000;
-    displayTimeLeft(seconds)
+    let time = mins * 60;
 
     countDown = setInterval(() => {
-        const secondsLeft = Math.round((then - Date.now()) / 1000);
-        if(secondsLeft <= 0) {
-            playAudio()
-            clearInterval(countDown)           
-        }
-        timeDis.textContent = secondsLeft
-        displayTimeLeft(secondsLeft)
-        
-    }, 1000);
-}
-function displayTimeLeft(seconds) {
-    const minutes = Math.floor(seconds / 60);
-    const remainderSeconds = seconds % 60;
-
-    const display = `${minutes < 10 ? '0' : ''}${minutes}:${remainderSeconds < 10 ? '0' : ''}${remainderSeconds}`
-    timeDis.textContent = display
-    secz = remainderSeconds
-    document.title =   `(${timeDis.textContent}) POMODORO!`
+        let minutes = Math.floor(time / 60)
+        let seconds = time % 60;
     
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        seconds = seconds < 10 ? '0' + seconds : seconds;
+        remainderSeconds = seconds;
+
+        timeDis.textContent = `${minutes}:${seconds}`
+        document.title =   `(${timeDis.textContent}) POMODORO!`
+    
+        if(seconds <= 0 && minutes <= 0) {
+            playAudio()
+            clearInterval(countDown)
+            document.title = `TIMER DONE`
+        } else {
+            time--
+        }
+    }, 1000)
 }
 
 //BUTTON FUNCTIONS
-brkBtn.onclick = function() {
-    timer(300)
-    status = 'started'
-    stopBtn.textContent = 'PAUSE'
+brkBtn.onclick = () => {
+    timer(5)
+    timerBtns();
 }
-longBreakBtn.onclick = function() {
-    timer(600)
+longBreakBtn.onclick = () => {
+    timer(10)
+    timerBtns();
+}
+pomoBtn.onclick = () => {
+    timer(25)
+    timerBtns();
+}
+const timerBtns = () => {
     status = 'started'
-    stopBtn.textContent = 'PAUSE'
+    pauseBtn.textContent = 'PAUSE'
 }
 
-pomoBtn.onclick = function() {
-    timer(1500)
-    status = 'started'
-    stopBtn.textContent = 'PAUSE'
-}
-stopBtn.onclick = function() {
+pauseBtn.onclick = () => {
     if(status === 'started') {
         clearInterval(countDown)
         status = 'paused'
-        currentTimeStamp = parseInt(timeDis.textContent) * 60 + secz
-        stopBtn.textContent = 'RESUME'
-        console.log(currentTimeStamp)
+        currentTimeStamp = parseInt(timeDis.textContent) + remainderSeconds / 60;
+        pauseBtn.textContent = 'RESUME'
+        document.title = 'PAUSED'
     } else if(status === 'paused') {
         clearInterval(countDown)
         timer(currentTimeStamp)
         status = 'started'
-        stopBtn.textContent = 'PAUSE'
+        pauseBtn.textContent = 'PAUSE'
     }
 }
-resetTime.onclick = function() {
+resetTime.onclick = () => {
     clearInterval(countDown)
     status = 'stopped'
     timeDis.textContent = '00:00'
     document.title = 'POMODORO!'
-    if(stopBtn.textContent === 'RESUME') {
-        stopBtn.textContent = 'PAUSE'
+    if(pauseBtn.textContent === 'RESUME') {
+        pauseBtn.textContent = 'PAUSE'
     }
 }
-enterBtn.onclick = function() {
-    fillArr();
-    $(enterBtn).fadeOut();
-    $(reseBtn).fadeIn();
-    $(userInput).fadeOut();
-    $(userInput).val('');
-    $(taskTime).fadeOut();
-}
-
-reseBtn.onclick = function() {
-
+reseBtn.onclick = () => {
     $(enterBtn).fadeIn();
     $(userInput).fadeIn();
     $(taskTime).fadeIn();
@@ -143,20 +125,25 @@ reseBtn.onclick = function() {
     
     $(reseBtn).hide();
 }
-function playAudio() {
+
+//Enter Key + Button
+const enterKeyBtn = () => {
+    let amount = document.getElementById('userInput').value
+    if(isNaN(amount)) return;
+
+    fillArr(amount);
+    $(enterBtn).fadeOut();
+    $(reseBtn).fadeIn();
+    $(userInput).fadeOut();
+    $(userInput).val('');
+    $(taskTime).fadeOut();
+}
+window.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter') enterKeyBtn();
+})
+enterBtn.onclick = () => enterKeyBtn();
+//Audio
+const playAudio = () => {
     let audio = new Audio('./resources/default.mp3')
     audio.play()
 }
-
-//Enter Key
-window.addEventListener('keydown', function(e){
-    const key = document.querySelector(`button[data-key='${e.keyCode}']`)
-    if(key.classList.contains('enter')) {
-        fillArr();
-        $(enterBtn).fadeOut();
-        $(reseBtn).fadeIn();
-        $(userInput).fadeOut();
-        $(userInput).val('');
-        $(taskTime).fadeOut();
-    }
-})
