@@ -61,7 +61,7 @@ const timer = (mins) => {
         remainderSeconds = seconds;
 
         timeDis.textContent = `${minutes}:${seconds}`
-        document.title =   `(${timeDis.textContent}) POMODORO!`
+        document.title = `(${timeDis.textContent}) POMODORO!`
     
         if(seconds <= 0 && minutes <= 0) {
             playAudio()
