@@ -9,16 +9,16 @@ let currentTimeStamp
 const pomoArea = document.getElementById('pomodoros');
 const toms = document.getElementById('img');
 const userInput = document.querySelector('input');
+const timeDis = document.getElementById('display');
+const taskTime = document.getElementById('taskTime')
+const totalTally = document.querySelector('span')
 const enterBtn = document.getElementById('enterBtn');
 const reseBtn = document.getElementById('reset');
-const timeDis = document.getElementById('display');
 const brkBtn = document.getElementById('breakBtn');
 const longBreakBtn = document.getElementById('longBreak')
 const pomoBtn = document.getElementById('pomoBtn');
 const pauseBtn = document.getElementById('pauseBtn');
 const resetTime = document.getElementById('resetBtn')
-const taskTime = document.getElementById('taskTime')
-const totalTally = document.querySelector('span')
 
 $(reseBtn).hide();
 
@@ -33,7 +33,6 @@ const fillPomos = () => {
     for(let i = 0; i < pomoArr.length; i++) {
         let img = document.createElement('img')
 
-        img.style.width = "125px";
         img.style.width = "125px";
         img.setAttribute('src', "./resources/tomato.png");
         img.className = 'img-fluid'
@@ -76,17 +75,17 @@ const timer = (mins) => {
 //BUTTON FUNCTIONS
 brkBtn.onclick = () => {
     timer(5)
-    timerBtns();
+    timerStart();
 }
 longBreakBtn.onclick = () => {
     timer(10)
-    timerBtns();
+    timerStart();
 }
 pomoBtn.onclick = () => {
     timer(25)
-    timerBtns();
+    timerStart();
 }
-const timerBtns = () => {
+const timerStart = () => {
     status = 'started'
     pauseBtn.textContent = 'PAUSE'
 }
