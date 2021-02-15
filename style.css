@@ -67,6 +67,8 @@ body {
     display: block;
     flex-direction: row;
     align-self: flex-end;
+    /* align-self: center; */
+    text-align: center;
 }
 #total {
     margin-top: 5px;

@@ -129,7 +129,7 @@ reseBtn.onclick = () => {
 //Enter Key + Button
 const enterKeyBtn = () => {
     let amount = document.getElementById('userInput').value
-    if(isNaN(amount)) return;
+    if(isNaN(amount) || amount === '') return;
 
     fillArr(amount);
     $(enterBtn).fadeOut();
