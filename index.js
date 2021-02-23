@@ -48,28 +48,36 @@ const fillPomos = () => {
 }
 //TIMER
 const timer = (mins) => {
-    clearInterval(countDown)
     let time = mins * 60;
+    const now = Date.now()
+    const then = now + time * 1000
 
+    clearInterval(countDown)
+    displayTimeLeft(time)
+    //run interval
     countDown = setInterval(() => {
-        let minutes = Math.floor(time / 60)
-        let seconds = time % 60;
+    const secondsLeft = Math.round((then - Date.now()) / 1000)
     
-        minutes = minutes < 10 ? '0' + minutes : minutes;
-        seconds = seconds < 10 ? '0' + seconds : seconds;
-        remainderSeconds = seconds;
-
-        timeDis.textContent = `${minutes}:${seconds}`
-        document.title = `(${timeDis.textContent}) POMODORO!`
-    
-        if(seconds <= 0 && minutes <= 0) {
-            playAudio()
-            clearInterval(countDown)
-            document.title = `TIMER DONE`
-        } else {
-            time--
-        }
+    if(secondsLeft < 0) {
+        playAudio()
+        clearInterval(countDown)
+        document.title = `TIMER DONE`
+        return;
+    }
+    displayTimeLeft(secondsLeft)
     }, 1000)
+}
+
+const displayTimeLeft = (seconds) => {
+    let minutes = Math.floor(seconds / 60);
+    let remainingSeconds = seconds % 60;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    remainingSeconds = remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds;
+    remainderSeconds = remainingSeconds;
+    const display = `${minutes}:${remainingSeconds}`
+
+    timeDis.textContent = display
+    document.title = `(${timeDis.textContent}) POMODORO!`   
 }
 
 //BUTTON FUNCTIONS
