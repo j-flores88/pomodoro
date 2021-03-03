@@ -1,13 +1,10 @@
-let pomoArr = []
 let total = 0;
-let pomosNeeded
 let countDown;
 let status = 'stopped'
 let remainderSeconds;
 let currentTimeStamp
 
 const pomoArea = document.getElementById('pomodoros');
-const toms = document.getElementById('img');
 const userInput = document.querySelector('input');
 const timeDis = document.getElementById('display');
 const taskTime = document.getElementById('taskTime')
@@ -22,15 +19,10 @@ const resetTime = document.getElementById('resetBtn')
 
 $(reseBtn).hide();
 
-const fillArr = (amount) => {
-    pomosNeeded = parseInt(amount) * 2;
-    for(let i = 0; i < pomosNeeded; i++) {
-        pomoArr.push(toms)
-    }
-    fillPomos()
-}
-const fillPomos = () => {
-    for(let i = 0; i < pomoArr.length; i++) {
+const fillPomos = (amount) => {
+    let pomosNeeded = parseInt(amount) * 2;
+    let i = 0;
+    while(i < pomosNeeded) {
         let img = document.createElement('img')
 
         img.style.width = "125px";
@@ -44,6 +36,7 @@ const fillPomos = () => {
             total += 1;
             totalTally.innerHTML = `POMODOROS: ${total} HOURS: ${total / 2}`
         }
+        i++
     }
 }
 //TIMER
@@ -127,7 +120,6 @@ reseBtn.onclick = () => {
     $(taskTime).fadeIn();
     $(totalTally).fadeOut();
     pomoArea.innerHTML = ""
-    pomoArr = []
     total = 0;
     
     $(reseBtn).hide();
@@ -138,7 +130,7 @@ const enterKeyBtn = () => {
     let amount = document.getElementById('userInput').value
     if(isNaN(amount) || amount === '') return;
 
-    fillArr(amount);
+    fillPomos(amount)
     $(enterBtn).fadeOut();
     $(reseBtn).fadeIn();
     $(userInput).fadeOut();
