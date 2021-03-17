@@ -10,19 +10,19 @@ const timeDis = document.getElementById('display');
 const taskTime = document.getElementById('taskTime')
 const totalTally = document.querySelector('span')
 const enterBtn = document.getElementById('enterBtn');
-const reseBtn = document.getElementById('reset');
+const restartBtn = document.getElementById('restart');
 const brkBtn = document.getElementById('breakBtn');
 const longBreakBtn = document.getElementById('longBreak')
 const pomoBtn = document.getElementById('pomoBtn');
 const pauseBtn = document.getElementById('pauseBtn');
 const resetTime = document.getElementById('resetBtn')
 
-$(reseBtn).hide();
+$(restartBtn).hide();
 
 const fillPomos = (amount) => {
     let pomosNeeded = parseInt(amount) * 2;
     let i = 0;
-    while(i < pomosNeeded) {
+    while (i < pomosNeeded) {
         let img = document.createElement('img')
 
         img.style.width = "125px";
@@ -90,8 +90,7 @@ const timerStart = () => {
     status = 'started'
     pauseBtn.textContent = 'PAUSE'
 }
-
-pauseBtn.onclick = () => {
+pauseBtn.addEventListener('click', () => {
     if(status === 'started') {
         clearInterval(countDown)
         status = 'paused'
@@ -101,11 +100,10 @@ pauseBtn.onclick = () => {
     } else if(status === 'paused') {
         clearInterval(countDown)
         timer(currentTimeStamp)
-        status = 'started'
-        pauseBtn.textContent = 'PAUSE'
+        timerStart();
     }
-}
-resetTime.onclick = () => {
+})
+resetTime.addEventListener('click', () => {
     clearInterval(countDown)
     status = 'stopped'
     timeDis.textContent = '00:00'
@@ -113,8 +111,8 @@ resetTime.onclick = () => {
     if(pauseBtn.textContent === 'RESUME') {
         pauseBtn.textContent = 'PAUSE'
     }
-}
-reseBtn.onclick = () => {
+})
+restartBtn.addEventListener('click', () => {
     $(enterBtn).fadeIn();
     $(userInput).fadeIn();
     $(taskTime).fadeIn();
@@ -122,9 +120,8 @@ reseBtn.onclick = () => {
     pomoArea.innerHTML = ""
     total = 0;
     
-    $(reseBtn).hide();
-}
-
+    $(restartBtn).hide();
+})
 //Enter Key + Button
 const enterKeyBtn = () => {
     let amount = document.getElementById('userInput').value
@@ -132,7 +129,7 @@ const enterKeyBtn = () => {
 
     fillPomos(amount)
     $(enterBtn).fadeOut();
-    $(reseBtn).fadeIn();
+    $(restartBtn).fadeIn();
     $(userInput).fadeOut();
     $(userInput).val('');
     $(taskTime).fadeOut();
@@ -140,7 +137,7 @@ const enterKeyBtn = () => {
 window.addEventListener('keydown', (e) => {
     if(e.key === 'Enter') enterKeyBtn();
 })
-enterBtn.onclick = () => enterKeyBtn();
+enterBtn.addEventListener('click', () => enterKeyBtn());
 //Audio
 const playAudio = () => {
     let audio = new Audio('./resources/default.mp3')
