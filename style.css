@@ -103,12 +103,12 @@ input {
       font-size: 10em;
     }
   }
-  @media screen and (min-width: 376px) {
+  @media screen and (min-width: 391px) {
     #title {
       font-size: 10em;
     }
   }
-  @media screen and (max-width: 375px) {
+  @media screen and (max-width: 390px) {
     #title {
       font-size: 3.5em;
     }
