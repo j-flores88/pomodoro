@@ -6,6 +6,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- FONTS -->
     <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ramabhadra&display=swap" rel="stylesheet">
@@ -20,40 +21,33 @@
 </head>
 <body>
     <div class="container" id="topHalf">
-        <div class="row" id="topLeft">
+        <div class="row">
             <div class="col" id="tomPic">
-                <img src="./resources/tomato.png" alt="" id="tomato" class="img-fluid">
+                <!-- <img src="./resources/tomato.png" alt="" id="tomato" class="img-fluid"> -->
+                <h1 id="title">POMO:DORO</h1>  
             </div>
-            <div class="col" id="topRight">
-                <div>
-                    <h1>POMODORO</h1> 
-                </div>
-                <div>
-                    <h4>Tomato Timer</h4>
-                </div>
-                
-            </div>
-        </div>
-        </div>
+        </div> 
     </div>
 
     <div id="tomatoSection" class="container">
         <div class="row">
             <div class="col" id="tomatoSection">
                 <p id="taskTime">How many hours will it take to complete the task?</p>
-                <input type="text" id="userInput" placeholder="Enter Hours">
-                <button data-key="13" id="enterBtn" class="btn btn-outline-dark enter">ENTER</button>
+                <div id="enterPomos">
+                    <input type="text" id="userInput" placeholder="Enter Hours">
+                    <button data-key="13" id="enterBtn" class="btn btn-outline-dark enter"><i class="fas fa-check"></i></button>
+                </div>
                 <div id="pomodoros"></div>
-                <button id="restart" class="btn btn-outline-dark">RESTART</button>
+                    <button id="restart" class="btn btn-outline-dark"><i class="fas fa-times"></i></button>
             </div>
             <div class="col" id="timerSection">
                 <p id="timeText">TIMER</p>
                 <p id="display">00:00</p>
-                <button id="pomoBtn" class="btn btn-outline-dark">POMODORO</button>                
-                <button id="breakBtn" class="btn btn-outline-dark">BREAK</button>
-                <button id="longBreak" class="btn btn-outline-dark">LONG BREAK</button>
-                <button id="pauseBtn" class="btn btn-outline-dark">PAUSE</button>
-                <button id="resetBtn" class="btn btn-outline-dark">RESET</button>
+                <button id="pomoBtn" class="btn btn-outline-dark"><i class="fas fa-stopwatch"></i></i></button>                
+                <button id="breakBtn" class="btn btn-outline-dark"><i class="fas fa-coffee"></i></button>
+                <button id="longBreak" class="btn btn-outline-dark"><i class="fas fa-coffee"></i><i class="fas fa-coffee"></i></button>
+                <button id="pauseBtn" class="btn btn-outline-dark"><i class="fas fa-pause"></i><i class="fas fa-play"></i></button>
+                <button id="resetBtn" class="btn btn-outline-dark"><i class="fas fa-undo-alt"></i></i></button>
                 <p id="total"><span></span> </p>
             </div>
 

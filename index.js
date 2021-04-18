@@ -16,7 +16,10 @@ const longBreakBtn = document.getElementById('longBreak')
 const pomoBtn = document.getElementById('pomoBtn');
 const pauseBtn = document.getElementById('pauseBtn');
 const resetTime = document.getElementById('resetBtn')
+const playIcon = document.getElementsByClassName('fas fa-play')
+const pauseIcon = document.getElementsByClassName('fas fa-pause')
 
+$(playIcon).hide()
 $(restartBtn).hide();
 
 const fillPomos = (amount) => {
@@ -25,7 +28,7 @@ const fillPomos = (amount) => {
     while (i < pomosNeeded) {
         let img = document.createElement('img')
 
-        img.style.width = "125px";
+        img.style.width = "100px";
         img.setAttribute('src', "./resources/tomato.png");
         img.className = 'img-fluid'
         pomoArea.appendChild(img)
@@ -88,14 +91,17 @@ pomoBtn.onclick = () => {
 }
 const timerStart = () => {
     status = 'started'
-    pauseBtn.textContent = 'PAUSE'
+    $(playIcon).hide();
+    $(pauseIcon).fadeIn();
 }
 pauseBtn.addEventListener('click', () => {
     if(status === 'started') {
         clearInterval(countDown)
         status = 'paused'
         currentTimeStamp = parseInt(timeDis.textContent) + remainderSeconds / 60;
-        pauseBtn.textContent = 'RESUME'
+        //pauseBtn.textContent = 'RESUME'
+        $(pauseIcon).hide();
+        $(playIcon).fadeIn();
         document.title = 'PAUSED'
     } else if(status === 'paused') {
         clearInterval(countDown)
