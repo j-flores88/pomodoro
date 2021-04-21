@@ -8,7 +8,7 @@ const pomoArea = document.getElementById('pomodoros');
 const userInput = document.querySelector('input');
 const timeDis = document.getElementById('display');
 const taskTime = document.getElementById('taskTime')
-const totalTally = document.querySelector('span')
+const totalTally = document.querySelector('#total')
 const enterBtn = document.getElementById('enterBtn');
 const restartBtn = document.getElementById('restart');
 const brkBtn = document.getElementById('breakBtn');
@@ -37,7 +37,11 @@ const fillPomos = (amount) => {
             $(this).fadeOut()
             $(totalTally).fadeIn();
             total += 1;
-            totalTally.innerHTML = `POMODOROS: ${total} HOURS: ${total / 2}`
+    
+            totalTally.innerHTML = `
+            <div>POMODOROS: ${total}</div>
+            <div>HOURS: ${total / 2}</div>
+            `;
         }
         i++
     }

@@ -51,18 +51,18 @@ body {
     margin-bottom: 25px;
     text-align: center;
 }
-#tomatoSection {
+/* #tomatoSection {
     margin-bottom: 75px;
-}
+} */
 /* #tomPic {
     display: flex;
     justify-content: flex-end;
 } */
-#tomatoSection {
+#bottomHalf {
     display: block;
     flex-direction: row;
     align-self: flex-end;
-    /* align-self: center; */
+    align-self: center;
     text-align: center;
     margin: auto;
 }
@@ -97,11 +97,11 @@ body {
 input {
     padding: 3px;
 }
-@media screen and (min-width: 300px) {
+/* @media screen and (min-width: 300px) {
     #topHalf {
-        margin-bottom: auto;
+        margin: 10px;
     }
-  } 
+  }  */
 @media screen and (min-width: 500px) {
     #title {
       font-size: 5em;
